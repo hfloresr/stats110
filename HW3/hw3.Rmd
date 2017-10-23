@@ -118,3 +118,21 @@ predict(np_fit, pages1500, interval="predict")
 
 **A 95% P.I. for a 1500-page textbook is [150.420, 283.907]. We don't have a 95% C.I since \
 we are predicting outside the range of the data we have available.**
+
+<br>
+
+### 4. Exercise 2.10 pg 82
+
+#### 4-(a). Decrease the width of the prediction interval
+
+#### 4-(b). Increase the width of the P.I.
+
+#### 4-(c). Increase the width of the P.I.
+
+#### 4-(d). Increase the width of the P.I.
+
+<br>
+
+### 5. Exercise 2.17, (b) and (c)
+
+#### 5-(b).
