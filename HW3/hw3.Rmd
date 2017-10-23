@@ -136,3 +136,18 @@ we are predicting outside the range of the data we have available.**
 ### 5. Exercise 2.17, (b) and (c)
 
 #### 5-(b).
+```{r}
+sparrows = read.csv("../data/Sparrows.csv")
+sparrow_fit = lm("Weight ~ WingLength", data=sparrows)
+summary(sparrow_fit)
+```
+
+**61.39% of the variation in weight is explained by WingLength**
+
+#### 5-(c).
+Provide the ANOVA table that partitions the total variablility in weight and interpret the F-test.
+```{r}
+anova(sparrow_fit)
+```
+
+**The F statistic is the same as the $t^2$ for $\beta_{1}=0$ vs $\beta_{1} \neq 0$. Hence, there is significant evidence that there is a linear trend**
