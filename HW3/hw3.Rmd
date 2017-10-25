@@ -151,3 +151,49 @@ anova(sparrow_fit)
 ```
 
 **The F statistic is the same as the $t^2$ for $\beta_{1}=0$ vs $\beta_{1} \neq 0$. Hence, there is significant evidence that there is a linear trend**
+
+<br>
+
+### 6. Exercise 2.44
+
+#### 6-(a).
+$\hat{\beta_{1}} = r \frac{s_x}{s_y} = (0.701)(\frac{104807}{657}) = 111.826$
+
+$\hat{\beta_{0}} = \bar{y} - \hat{\beta_{1}} \bar{x} = 247235 - (111.826)(2009) = 22576.57$
+
+$\therefore \: \hat{y} = 22576.57 + 111.826x$
+
+<br>
+
+#### 6-(b).
+$r^2 = 0.491401$
+
+**49.1% of the variation in gate counts is explained by enrollements.**
+
+<br>
+
+#### 6-(c).
+$\hat{y} = 22576.57 + 111.826(1445) = 184165.1$
+
+<br>
+
+#### 6-(d).
+$\begin{align*}
+e &= 130000 - [22576.57 + 111.826(2200)]\\
+   &= 130000 - 268593.8\\
+   &= -138593.8
+\end{align*}$
+
+<br>
+
+### 7. Skin Cancer example shown in class on Oc 16
+
+#### 7-(a)
+
+$\hat{\beta_1} = -5.9776$
+
+Std. Error of $\hat{\beta_1} = 0.5984$
+
+$MSE = RSE^2 = 365.5744$
+
+$SSX = $
