@@ -1,7 +1,15 @@
 ---
-title: "HW 3"
-output: html_notebook
+output: html_document
 ---
+
+
+## B27 \
+Hector G. Flores Rodriguez
+
+### Stats 110 - HW 3 \
+October 24, 2017
+
+<br>
 
 ### 1. Create new data set called *NewPrices* by removing the row with the outlier
 
@@ -54,14 +62,12 @@ $R_{TextPrices}^{2} = 0.6766$
 
 $R_{NewPrices}^{2} = 0.7341$
 
-$73\%$ of the variation in book prices (in NewPrice data set) is explained 
-by the number of pages.
+$73\%$ of the variation in book prices (in NewPrice data set) is explained by the number of pages.
 
 <br>
 
 #### 2-(b).
-The NewPrice data set does a better job in prediction since it captures more 
-of the variance than the original data set.
+The NewPrice data set does a better job in prediction since it captures more of the variance than the original data set.
 
 <br>
 
@@ -100,8 +106,7 @@ value of $\hat{y}$ given by OLS.**
 <br>
 
 #### 3-(d).
-**The P.I. width is much larger than the C.I. This makes sense since the prediction \ 
-interval takes into account uncertainty for individual observations rather than the mean value**
+**The P.I. width is much larger than the C.I. This makes sense since the prediction interval takes into account uncertainty for individual observations rather than the mean value**
 
 <br>
 
@@ -116,8 +121,7 @@ pages1500 = data.frame(Pages=1500)
 predict(np_fit, pages1500, interval="predict")
 ```
 
-**A 95% P.I. for a 1500-page textbook is [150.420, 283.907]. We don't have a 95% C.I since \
-we are predicting outside the range of the data we have available.**
+**A 95% P.I. for a 1500-page textbook is [150.420, 283.907]. We don't have a 95% C.I since we are predicting outside the range of the data we have available.**
 
 <br>
 
@@ -178,22 +182,31 @@ $\hat{y} = 22576.57 + 111.826(1445) = 184165.1$
 <br>
 
 #### 6-(d).
-$\begin{align*}
-e &= 130000 - [22576.57 + 111.826(2200)]\\
-   &= 130000 - 268593.8\\
-   &= -138593.8
-\end{align*}$
+
+$e = 130000 - (22576.57 + 111.826(2200)) = -138593.8$
 
 <br>
 
 ### 7. Skin Cancer example shown in class on Oc 16
 
-#### 7-(a)
+#### 7-(a).
 
 $\hat{\beta_1} = -5.9776$
 
-Std. Error of $\hat{\beta_1} = 0.5984$
+$SE\{\hat{\beta_1}\} = 0.5984$
 
 $MSE = RSE^2 = 365.5744$
 
-$SSX = $
+$SSX = \frac{MSE}{SE\{\hat{\beta_1}\}^2} = 610.9198$
+
+$\hat{y} = 389.894 - (5.9776)(33.7) = 188.44888$
+
+<br>
+
+#### 7-(b).
+
+$(t_{{0.025}, 47})\sqrt{MSE}\sqrt{\frac{1}{n} + \frac{(33.7-39.52)^2}{SSX}} = (2.011741)(5.272538) = 10.60698$
+
+$\implies \hat{\beta_1} \pm 10.60698$
+
+$\therefore \text{A 95% C.I. is } \: [-16.58458, \; 4.62938]$

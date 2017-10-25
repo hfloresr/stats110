@@ -1,0 +1,476 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{{#1}}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{}
+  \pretitle{\vspace{\droptitle}}
+  \posttitle{}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+
+\begin{document}
+
+\subsection{\texorpdfstring{B27\\
+Hector G. Flores
+Rodriguez}{B27 Hector G. Flores Rodriguez}}\label{b27-hector-g.-flores-rodriguez}
+
+\subsubsection{\texorpdfstring{Stats 110 - HW 3\\
+October 24,
+2017}{Stats 110 - HW 3 October 24, 2017}}\label{stats-110---hw-3-october-24-2017}
+
+\subsubsection{\texorpdfstring{1. Create new data set called
+\emph{NewPrices} by removing the row with the
+outlier}{1. Create new data set called NewPrices by removing the row with the outlier}}\label{create-new-data-set-called-newprices-by-removing-the-row-with-the-outlier}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{textprices =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"../data/TextPrices.csv"}\NormalTok{)}
+\NormalTok{NewPrices =}\StringTok{ }\NormalTok{textprices[-}\DecValTok{4}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{\texorpdfstring{1-(a). Use summary command in R to provide
+summaries of the two variables\\
+for the original data set and the new data
+set.}{1-(a). Use summary command in R to provide summaries of the two variables for the original data set and the new data set.}}\label{a.-use-summary-command-in-r-to-provide-summaries-of-the-two-variables-for-the-original-data-set-and-the-new-data-set.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# With outlier}
+\KeywordTok{summary}\NormalTok{(textprices)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Pages            Price       
+##  Min.   :  51.0   Min.   :  4.25  
+##  1st Qu.: 212.0   1st Qu.: 17.59  
+##  Median : 456.5   Median : 55.12  
+##  Mean   : 464.5   Mean   : 65.02  
+##  3rd Qu.: 672.0   3rd Qu.: 95.75  
+##  Max.   :1060.0   Max.   :169.75
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Without outlier}
+\KeywordTok{summary}\NormalTok{(NewPrices)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Pages            Price       
+##  Min.   :  51.0   Min.   :  4.25  
+##  1st Qu.: 200.0   1st Qu.: 16.95  
+##  Median : 488.0   Median : 51.50  
+##  Mean   : 466.8   Mean   : 62.83  
+##  3rd Qu.: 696.0   3rd Qu.: 95.00  
+##  Max.   :1060.0   Max.   :169.75
+\end{verbatim}
+
+\paragraph{1-(b).}\label{b.}
+
+The mean number of pages for the data without outlier is: \textbf{466.8}
+
+The predicted price for the mean number of pages would be:
+\textbf{\$62.83}
+
+\subsubsection{\texorpdfstring{2. Find the \(R^2\) using the TextPrices
+data and again using the NewPrices
+data.}{2. Find the R\^{}2 using the TextPrices data and again using the NewPrices data.}}\label{find-the-r2-using-the-textprices-data-and-again-using-the-newprices-data.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# R-squared value for textprices}
+\NormalTok{tp_fit =}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\StringTok{"Price ~ Pages"}\NormalTok{, }\DataTypeTok{data=}\NormalTok{textprices)}
+\KeywordTok{summary}\NormalTok{(tp_fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = "Price ~ Pages", data = textprices)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -65.475 -12.324  -0.584  15.304  72.991 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -3.42231   10.46374  -0.327    0.746    
+## Pages        0.14733    0.01925   7.653 2.45e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 29.76 on 28 degrees of freedom
+## Multiple R-squared:  0.6766, Adjusted R-squared:  0.665 
+## F-statistic: 58.57 on 1 and 28 DF,  p-value: 2.452e-08
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# R-squared value for NewPrices}
+\NormalTok{np_fit =}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\StringTok{"Price ~ Pages"}\NormalTok{, }\DataTypeTok{data=}\NormalTok{NewPrices)}
+\KeywordTok{summary}\NormalTok{(np_fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = "Price ~ Pages", data = NewPrices)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -63.23 -12.29   2.16  13.25  53.46 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  -6.8926     9.4775  -0.727    0.473    
+## Pages         0.1494     0.0173   8.634    3e-09 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 26.72 on 27 degrees of freedom
+## Multiple R-squared:  0.7341, Adjusted R-squared:  0.7243 
+## F-statistic: 74.55 on 1 and 27 DF,  p-value: 3.001e-09
+\end{verbatim}
+
+\paragraph{2-(a).}\label{a.}
+
+\(R_{TextPrices}^{2} = 0.6766\)
+
+\(R_{NewPrices}^{2} = 0.7341\)
+
+\(73\%\) of the variation in book prices (in NewPrice data set) is
+explained by the number of pages.
+
+\paragraph{2-(b).}\label{b.-1}
+
+The NewPrice data set does a better job in prediction since it captures
+more of the variance than the original data set.
+
+\subsubsection{3. Exercise 2.15 with NewPrices
+data}\label{exercise-2.15-with-newprices-data}
+
+\paragraph{3-(a).}\label{a.-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu_price =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{Pages=}\DecValTok{450}\NormalTok{)}
+\KeywordTok{predict}\NormalTok{(np_fit, mu_price, }\DataTypeTok{interval=}\StringTok{"confidence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        fit      lwr      upr
+## 1 60.32434 50.12599 70.52269
+\end{verbatim}
+
+\textbf{A 95\% C.I. is {[}50.126, 70.523{]}}
+
+\paragraph{3-(b).}\label{b.-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{predict}\NormalTok{(np_fit, mu_price, }\DataTypeTok{interval=}\StringTok{"predict"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        fit      lwr      upr
+## 1 60.32434 4.557604 116.0911
+\end{verbatim}
+
+\textbf{A 95\% P.I. is {[}4.558, 116.091{]}}
+
+\paragraph{3-(c).}\label{c.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{4.558}\NormalTok{, }\FloatTok{116.091}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 60.3245
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{50.126}\NormalTok{, }\FloatTok{70.523}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 60.3245
+\end{verbatim}
+
+\textbf{The midpoint of the two intervals are the same since they both
+should be the value of \(\hat{y}\) given by OLS.}
+
+\paragraph{3-(d).}\label{d.}
+
+\textbf{The P.I. width is much larger than the C.I. This makes sense
+since the prediction ~ interval takes into account uncertainty for
+individual observations rather than the mean value}
+
+\paragraph{3-(e).}\label{e.}
+
+\textbf{The mean number of pages: 466.8}
+
+\paragraph{3-(f).}\label{f.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pages1500 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{Pages=}\DecValTok{1500}\NormalTok{)}
+\KeywordTok{predict}\NormalTok{(np_fit, pages1500, }\DataTypeTok{interval=}\StringTok{"predict"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        fit      lwr      upr
+## 1 217.1638 150.4203 283.9074
+\end{verbatim}
+
+\textbf{A 95\% P.I. for a 1500-page textbook is {[}150.420, 283.907{]}.
+We don't have a 95\% C.I since\\
+we are predicting outside the range of the data we have available.}
+
+\subsubsection{4. Exercise 2.10 pg 82}\label{exercise-2.10-pg-82}
+
+\paragraph{4-(a). Decrease the width of the prediction
+interval}\label{a.-decrease-the-width-of-the-prediction-interval}
+
+\paragraph{4-(b). Increase the width of the
+P.I.}\label{b.-increase-the-width-of-the-p.i.}
+
+\paragraph{4-(c). Increase the width of the
+P.I.}\label{c.-increase-the-width-of-the-p.i.}
+
+\paragraph{4-(d). Increase the width of the
+P.I.}\label{d.-increase-the-width-of-the-p.i.}
+
+\subsubsection{5. Exercise 2.17, (b) and
+(c)}\label{exercise-2.17-b-and-c}
+
+\paragraph{5-(b).}\label{b.-3}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sparrows =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"../data/Sparrows.csv"}\NormalTok{)}
+\NormalTok{sparrow_fit =}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\StringTok{"Weight ~ WingLength"}\NormalTok{, }\DataTypeTok{data=}\NormalTok{sparrows)}
+\KeywordTok{summary}\NormalTok{(sparrow_fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = "Weight ~ WingLength", data = sparrows)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.5440 -0.9935  0.0809  1.0559  3.4168 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  1.36549    0.95731   1.426    0.156    
+## WingLength   0.46740    0.03472  13.463   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.4 on 114 degrees of freedom
+## Multiple R-squared:  0.6139, Adjusted R-squared:  0.6105 
+## F-statistic: 181.3 on 1 and 114 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\textbf{61.39\% of the variation in weight is explained by WingLength}
+
+\paragraph{5-(c).}\label{c.-1}
+
+Provide the ANOVA table that partitions the total variablility in weight
+and interpret the F-test.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anova}\NormalTok{(sparrow_fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: Weight
+##             Df Sum Sq Mean Sq F value    Pr(>F)    
+## WingLength   1 355.05  355.05  181.25 < 2.2e-16 ***
+## Residuals  114 223.31    1.96                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\textbf{The F statistic is the same as the \(t^2\) for \(\beta_{1}=0\)
+vs \(\beta_{1} \neq 0\). Hence, there is significant evidence that there
+is a linear trend}
+
+\subsubsection{6. Exercise 2.44}\label{exercise-2.44}
+
+\paragraph{6-(a).}\label{a.-2}
+
+\(\hat{\beta_{1}} = r \frac{s_x}{s_y} = (0.701)(\frac{104807}{657}) = 111.826\)
+
+\(\hat{\beta_{0}} = \bar{y} - \hat{\beta_{1}} \bar{x} = 247235 - (111.826)(2009) = 22576.57\)
+
+\(\therefore \: \hat{y} = 22576.57 + 111.826x\)
+
+\paragraph{6-(b).}\label{b.-4}
+
+\(r^2 = 0.491401\)
+
+\textbf{49.1\% of the variation in gate counts is explained by
+enrollements.}
+
+\paragraph{6-(c).}\label{c.-2}
+
+\(\hat{y} = 22576.57 + 111.826(1445) = 184165.1\)
+
+\paragraph{6-(d).}\label{d.-1}
+
+\subsubsection{7. Skin Cancer example shown in class on Oc
+16}\label{skin-cancer-example-shown-in-class-on-oc-16}
+
+\paragraph{7-(a).}\label{a.-3}
+
+\(\hat{\beta_1} = -5.9776\)
+
+\(SE\{\hat{\beta_1}\} = 0.5984\)
+
+\(MSE = RSE^2 = 365.5744\)
+
+\(SSX = \frac{MSE}{SE\{\hat{\beta_1}\}^2} = 610.9198\)
+
+\(\hat{y} = 389.894 - (5.9776)(33.7) = 188.44888\)
+
+\paragraph{7-(b).}\label{b.-5}
+
+\((t_{{0.025}, 47})\sqrt{MSE}\sqrt{\frac{1}{n} + \frac{(33.7-39.52)^2}{SSX}} = (2.011741)(5.272538) = 10.60698\)
+
+\(\implies \hat{\beta_1} \pm 10.60698\)
+
+\(\therefore \text{A 95% C.I. is } \: [-16.58458, \; 4.62938]\)
+
+
+\end{document}
