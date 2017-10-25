@@ -1,5 +1,7 @@
 ---
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 
@@ -209,4 +211,4 @@ $(t_{{0.025}, 47})\sqrt{MSE}\sqrt{\frac{1}{n} + \frac{(33.7-39.52)^2}{SSX}} = (2
 
 $\implies \hat{\beta_1} \pm 10.60698$
 
-$\therefore \text{A 95% C.I. is } \: [-16.58458, \; 4.62938]$
+$\therefore  [-16.58458, 4.62938]$
