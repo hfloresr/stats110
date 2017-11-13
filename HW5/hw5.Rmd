@@ -1,0 +1,154 @@
+---
+output: pdf_document
+---
+
+## B27 \
+Hector G. FLores Rodriguez
+
+### Stats 110 - HW5 \
+November 13, 2017
+
+<br>
+
+### 1. 3.23
+```{r}
+# Load data
+diamonds = read.csv("../data/Diamonds.csv")
+```
+
+<br>
+
+#### 1-(a). Quadratic model using Depth
+```{r}
+model_a = lm(TotalPrice ~ Depth + I(Depth^2), data=diamonds)
+summary(model_a)
+```
+
+<br>
+
+#### 1-(b). Two-predictor model using Carat and Depth
+```{r}
+model_b = lm(TotalPrice ~ Carat + Depth, data=diamonds)
+summary(model_b)
+```
+
+<br>
+
+#### 1-(c). A three-predictor model that adds interaction for Carat and Depth
+```{r}
+model_c = lm(TotalPrice ~ Carat + Depth + Carat*Depth, data=diamonds)
+summary(model_c)
+```
+
+<br>
+
+#### 1-(d). Complete second-order model using Carat and Depth.
+```{r}
+model_d = lm(TotalPrice ~ Carat + Depth + I(Carat^2) + I(Depth^2) + Carat*Depth,
+             data=diamonds)
+summary(model_d)
+```
+
+The quadratic model where CaratSq is the quadratic term provides the better model. The model captures most of the variance yet it is a more parsimonious model than the second order model and the three predictor model with the interaction term. 
+
+<br>
+
+### 2. Exercise 3.24
+
+```{r}
+my_model = lm(TotalPrice ~ Carat + I(Carat^2), data=diamonds)
+summary(my_model)
+```
+
+<br>
+
+#### 2-(a). Check for homoscedacity and normality
+```{r}
+par(mfrow=c(1,2))
+residuals = rstandard(my_model)
+plot(residuals)
+qqnorm(residuals)
+qqline(residuals)
+```
+
+There is heteroskedacity and a lack of normality in my model.
+
+<br>
+
+#### 2-(b). Transform response variable to natural log
+```{r}
+log_model = lm(log(TotalPrice) ~ Carat + I(Carat^2), data=diamonds)
+summary(log_model)
+```
+My "best" choice of predictors is still a reasonable choice for predicting logPrice.
+
+#### 2-(c). Check graphs for log model
+```{r}
+par(mfrow=c(1,2))
+residuals2 = rstandard(log_model)
+plot(residuals2)
+qqnorm(residuals2)
+qqline(residuals2)
+```
+The log transformation helped with heteroskedacity and normality. The assumptions are now fairly reasonable.
+
+<br>
+
+### 4. Exercise 3.25
+Use nested F-test for the complete second-order model to determine if all the terms in the model that involve Depth could be removed withought signifcantly impairing its effectiveness.
+
+<br>
+
+```{r}
+full_model = model_d
+reduced_model = my_model
+anova(reduced_model, full_model)
+```
+
+There exist some term that involves information on Depth that is significant.
+
+<br>
+
+### 4. Exercise 3.26
+Couple found a 0.5-carat diamond with depth of 62%.
+
+#### 4-(a). Determine average total price for quadratic model
+
+```{r}
+new_diamond = data.frame(Carat=0.5, Depth=62.0)
+predict(my_model, new_diamond)
+```
+
+The quadratic model predicts $1794.84 as the average total price.
+
+<br>
+
+#### 4-(b). 95% confidence interval for the mean total price
+```{r}
+predict(my_model, new_diamond, interval="c")
+```
+
+With 95% confidence, the mean total price for a 0.5-carat diamond with a depth of 62% somewhere between $1424.30 and $2165.40
+
+#### 4-(c). 95% prediction interval
+```{r}
+predict(my_model, new_diamond, interval="predict")
+```
+With 95% confidence, we predict that the total price for a 0.5-carat diamond with depth of 62% is somewhere between $0 and $5994.15
+
+**Note**: Negative dollars or recieving money for purchasing a diamond doesn't make sense.
+
+<br>
+
+#### 4-(d). Repeat two intervals for logPrice
+```{r}
+exp(predict(log_model, new_diamond, interval="c"))
+```
+
+With 95% confidence, the mean total price for a 0.5-carat diamond with a depth of 62% somewhere between $1784.59 and $1938.91
+
+```{r}
+exp(predict(log_model, new_diamond, interval="p"))
+```
+
+With 95% confidence, we predict that the total price for a 0.5-carat diamond with depth of 62% is somewhere between $1162.65 and $2976.09
