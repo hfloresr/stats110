@@ -1,0 +1,134 @@
+---
+title: "hw6"
+output: html_notebook
+---
+
+## B27 \
+Hector G. Flores Rodriguez
+
+### Stats 110 - HW6
+November 22, 2017
+
+### 4.7
+```{r}
+library(leaps)
+library(HH)
+baseball_times = read.csv("../data/BaseballTimes.csv")
+all = regsubsets(Time ~ Runs + Margin + Pitchers + Attendance,
+                 data=baseball_times)
+summaryHH(all)
+```
+
+#### (a). Maximize $R^2$
+model_a = Runs + Margin + Pitchers + Attendance
+
+<br>
+
+#### (b). Maximize $R_{adj}^2$
+model_b = Margin + Pitchers + Attendance
+
+<br>
+
+#### (c). Minimize Mallow's $C_p$
+model_c = Pitchers
+
+<br>
+
+#### (d). What model to choose to predict game times?
+I would choose model_b to predict game times. The model captures most of the variance (relative to the other models) and $C_p=3.22 \lt p+1=4$, which is a model worth considering. Furthermore, the data only has 15 observations and if the problem is not sparse enough then having a lot of variables can result in overfitting. Lastly, I wouldn't blindly trust Mallow's $C_p$ on such a small sample size.
+
+### Part 2
+
+#### 1. Use momheight and dadheight to predict Height. Show regression results
+```{r}
+heights = read.table("../data/Hmwk6.txt", sep="\t", header=TRUE)
+model = lm("Height ~ momheight + dadheight", data=heights)
+summary(model_1)
+```
+```{r}
+heights$y_hat = predict(model)
+head(heights$y_hat)
+```
+
+<br>
+
+#### 2. Find case diagnostic values.
+
+```{r}
+heights$rstandard = rstandard(model)
+heights$rstudent = rstudent(model)
+heights$hi = hatvalues(model)
+heights$cooks = cooks.distance(model)
+head(heights[1:5, c("rstandard", "rstudent", "hi", "cooks")])
+```
+
+<br>
+
+#### 3. Identify all of the cases tha need to be investigated using cretira for moderate and extreme values.
+
+```{r}
+p = 2 + 1  # k + 1
+n = nrow(heights)
+
+high_stud = heights$rstudent[abs(heights$rstudent) > 3]
+low_stud = heights$rstudent[abs(heights$rstudent) > 2]
+flagH_stud = heights[match(high_stud, heights$rstudent),]
+flagL_stud = heights[match(low_stud, heights$rstudent),]
+
+high_lev = heights$hi[heights$hi > 3*p/n]
+low_lev = heights$hi[heights$hi > 2*p/n]
+flagH_lev = heights[match(high_lev, heights$hi),]
+flagL_lev = heights[match(low_lev, heights$hi),]
+
+high_cook = heights$cooks[heights$cooks > 1]
+low_cook = heights$cooks[heights$cooks > 0.5]
+flagH_cook = heights[match(high_cook, heights$cooks),]
+flagL_cook = heights[match(low_cook, heights$cooks),]
+```
+
+<br>
+
+#### 4. Print ID, momheight, dadheight, height, and y_hat
+
+<br>
+
+**Studentize residuals:**
+```{r}
+flagL_stud
+```
+```{r}
+flagH_stud
+```
+
+<br>
+
+**Leverage:**
+```{r}
+flagL_lev
+```
+```{r}
+flagH_lev
+```
+
+<br>
+
+**Cooks:**
+```{r}
+flagL_cook
+flagH_cook
+```
+
+#### 5.
+
+ID: 86. The momheight is 11 inches greater than dadheight. This is quite unusual for the sample given, resulting in predicted hight lower than the actual height, since the dadheight seems to be more significantly significant for predicting male height.
+
+ID: 131. Both momheight and dadheight are reasonably similar. However the true height is shorter than both momheight and dadheight. The predicted height overestimated the actual height.
+
+ID: 36. The true height is much taller than both dadheight and momheight. However the predicted height underestimated the true height by 6 inches.
+
+ID: 122. The dadheigt is much greater than the momheight. However the true height lied approximately between the momheight and dadheight. The predicted height overestimated the true height since the dadheight was quite large.
+
+<br>
+
+#### 6.
+I would remove ID:86. The momheight being 11 inches greater than the dadheight suggests an outlier since the sample doesn't provide a similar case.
