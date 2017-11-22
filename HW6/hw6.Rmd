@@ -1,6 +1,5 @@
 ---
-title: "hw6"
-output: html_notebook
+output: pdf_document
 ---
 
 ## B27 \
@@ -35,7 +34,7 @@ model_c = Pitchers
 <br>
 
 #### (d). What model to choose to predict game times?
-I would choose model_b to predict game times. The model captures most of the variance (relative to the other models) and $C_p=3.22 \lt p+1=4$, which is a model worth considering. Furthermore, the data only has 15 observations and if the problem is not sparse enough then having a lot of variables can result in overfitting. Lastly, I wouldn't blindly trust Mallow's $C_p$ on such a small sample size.
+I would choose model_b to predict game times. The model captures most of the variance (relative to the other models) and $C_{p}=3.22$ $<$ $p+1=4$, which is a model worth considering. Furthermore, the data only has 15 observations and if the problem is not sparse enough then having a lot of variables can result in overfitting. Lastly, I wouldn't blindly trust Mallow's $C_{p}$ on such a small sample size.
 
 ### Part 2
 
@@ -43,7 +42,7 @@ I would choose model_b to predict game times. The model captures most of the var
 ```{r}
 heights = read.table("../data/Hmwk6.txt", sep="\t", header=TRUE)
 model = lm("Height ~ momheight + dadheight", data=heights)
-summary(model_1)
+summary(model)
 ```
 ```{r}
 heights$y_hat = predict(model)
